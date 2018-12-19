@@ -38,22 +38,70 @@ ORDER BY country;
 
 #3a. You want to keep a description of each actor. You don't think you will be performing queries on a description, so create a column in the table actor named description and use the data type BLOB (Make sure to research the type BLOB, as the difference between it and VARCHAR are significant).
 
-
-
 #3b. Very quickly you realize that entering descriptions for each actor is too much effort. Delete the description column.
 
 #4a. List the last names of actors, as well as how many actors have that last name.
 
+SELECT last_name, count(last_name) AS last_name_count
+FROM actor
+GROUP BY last_name;
+
 #4b. List last names of actors and the number of actors who have that last name, but only for names that are shared by at least two actors
+
+SELECT last_name, count(last_name) AS last_name_count
+FROM actor
+GROUP BY last_name
+HAVING count(last_name) > 1;
 
 #4c. The actor HARPO WILLIAMS was accidentally entered in the actor table as GROUCHO WILLIAMS. Write a query to fix the record.
 
+SELECT first_name, last_name
+FROM actor
+WHERE 
+	last_name = 'WILLIAMS'
+	OR 
+first_name = 'GROUCHO';
+
+UPDATE actor
+SET first_name = 'HARPO' 
+WHERE 
+	last_name = 'WILLIAMS'
+	AND 
+first_name = 'GROUCHO';
+
+SELECT first_name, last_name
+FROM actor
+WHERE 
+	last_name = 'WILLIAMS'
+	AND 
+first_name = 'HARPO'; 
+
 #4d. Perhaps we were too hasty in changing GROUCHO to HARPO. It turns out that GROUCHO was the correct name after all! In a single query, if the first name of the actor is currently HARPO, change it to GROUCHO.
+
+SELECT first_name, last_name
+FROM actor
+WHERE 
+first_name = 'HARPO'; 
+
+UPDATE actor
+SET first_name = 'GROUCHO' 
+WHERE  
+first_name = 'HARPO';
+
+SELECT first_name, last_name
+FROM actor
+WHERE 
+first_name = 'HARPO'; 
 
 #5a. You cannot locate the schema of the address table. Which query would you use to re-create it?
 
+DESCRIBE sakila.address;
+DESC sakila.address;
+SHOW CREATE TABLE sakila.address;
 
 #6a. Use JOIN to display the first and last names, as well as the address, of each staff member. Use the tables staff and address:
+
+
 
 #6b. Use JOIN to display the total amount rung up by each staff member in August of 2005. Use tables staff and payment.
 
