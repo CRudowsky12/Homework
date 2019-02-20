@@ -159,7 +159,7 @@ d3.csv("data.csv", function(err, data) {
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .classed("axis-text", true)
-    .text("Number of Billboard 500 Hits");
+    .text("Annual Income ($)");
 
   // updateToolTip function above csv import
   var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
@@ -178,7 +178,7 @@ d3.csv("data.csv", function(err, data) {
 
         // functions here found above csv import
         // updates x scale for new data
-        xLinearScale = xScale(hairData, chosenXAxis);
+        xLinearScale = xScale(data, chosenXAxis);
 
         // updates x axis with transition
         xAxis = renderAxes(xLinearScale, xAxis);
@@ -190,7 +190,7 @@ d3.csv("data.csv", function(err, data) {
         circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
 
         // changes classes to change bold text
-        if (chosenXAxis === "num_albums") {
+        if (chosenXAxis === "income") {
           incomeLabel
             .classed("active", true)
             .classed("inactive", false);
