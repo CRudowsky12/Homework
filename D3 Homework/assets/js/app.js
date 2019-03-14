@@ -90,9 +90,10 @@ function updateToolTip(chosenXAxis, circlesGroup) {
   return circlesGroup;
 }
 
+
 // Retrieve data from the CSV file and execute everything below
-d3.csv("data.csv", function(err, data) {
-  if (err) throw err;
+d3.csv("assets/data/data.csv")
+    .then(function(data) {
 
   // parse data
   data.forEach(function(data) {
@@ -100,6 +101,8 @@ d3.csv("data.csv", function(err, data) {
     data.income = +data.income;
     data.smokes = +data.smokes;
   });
+
+  console.log(data);
 
   // xLinearScale function above csv import
   var xLinearScale = xScale(data, chosenXAxis);
@@ -209,3 +212,6 @@ d3.csv("data.csv", function(err, data) {
       }
     });
 });
+
+
+//go through scatter plot activity 
